@@ -1,0 +1,35 @@
+<div class="container">
+	<div class="row">
+		<div class="col s5">
+			<div class="card-content">
+				<form #flightForm="ngForm"(ngSubmit)="addFlight(flightForm)">
+					<div class="row">
+						<div class="input-field col s12">
+							<input type="text" name="name" #name="ngModel" [(ngModel)]="flightService.selectedFlight.name" placeholder="Enter your Name">
+						</div>
+						<div class="input-field col s12">
+							<input type="text" name="position" #position="ngModel" [(ngModel)]="flightService.selectedFlight.position" placeholder="Enter your Position">
+						</div>
+						<div class="input-field col s12">
+							<input type="text" name="office" #office="ngModel" [(ngModel)]="flightService.selectedFlight.office" placeholder="Enter your Office">
+						</div>
+						<div class="input-field col s12">
+							<input type="text" name="salary" #salary="ngModel" [(ngModel)]="flightService.selectedFlight.salary" placeholder="Enter your Salary">
+						</div>
+						<div class="card-action">
+							<div class="input-field col s12">
+								<button class="btn" (click)="resetForm(flightForm)">Clean</button>
+								<button class="btn right">Save</button>
+
+							</div>
+						</div>
+
+					</div>
+				</form>			
+			</div>
+		</div>	
+		<div class="col s7">
+			
+		</div>
+	</div>
+</div>
