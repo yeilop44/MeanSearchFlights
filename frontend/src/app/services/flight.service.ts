@@ -19,12 +19,21 @@ export class FlightService {
   getFlights() {
   	return this.http.get(this.URL_API);
   }
+
+  getFlight(_id: string) {
+    return this.http.get(this.URL_API+ `/${_id}`);
+  }
+
+  //search fligths by ORIGIN, DESTINAION and DATE
+  getFlightMultiParams(origin: string, destination: string, date: string) {
+    return this.http.get(this.URL_API+ '/origin'+`/${origin}`+'/destination'+`/${destination}`+'/date'+`/${date}`);
+  }
   
   postFlights(Flight: Flight) {
   	return this.http.post(this.URL_API, Flight);
   }
   
-  putFlights(Flight: Flight) {
+  putFlight(Flight: Flight) {
   	return this.http.put(this.URL_API + `/${Flight._id}`, Flight);
   }
   deleteFlights(_id: string) {

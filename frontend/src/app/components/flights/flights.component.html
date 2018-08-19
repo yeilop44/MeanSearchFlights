@@ -3,24 +3,27 @@
 		<div class="col s5">
 			<div class="card-content">
 				<form #flightForm="ngForm"(ngSubmit)="addFlight(flightForm)">
+					<input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="flightService.selectedFlight._id">
 					<div class="row">
 						<div class="input-field col s12">
-							<input type="text" name="name" #name="ngModel" [(ngModel)]="flightService.selectedFlight.name" placeholder="Enter your Name">
+							<input type="text" name="origin" #origin="ngModel" [(ngModel)]="flightService.selectedFlight.origin" placeholder="Enter your origin">
 						</div>
 						<div class="input-field col s12">
-							<input type="text" name="position" #position="ngModel" [(ngModel)]="flightService.selectedFlight.position" placeholder="Enter your Position">
+							<input type="text" name="destination" #destination="ngModel" [(ngModel)]="flightService.selectedFlight.destination" placeholder="Enter your destination">
 						</div>
 						<div class="input-field col s12">
-							<input type="text" name="office" #office="ngModel" [(ngModel)]="flightService.selectedFlight.office" placeholder="Enter your Office">
+							<input type="date" name="date" #date="ngModel" [(ngModel)]="flightService.selectedFlight.date" placeholder="Enter your date">
 						</div>
 						<div class="input-field col s12">
-							<input type="text" name="salary" #salary="ngModel" [(ngModel)]="flightService.selectedFlight.salary" placeholder="Enter your Salary">
+							<input type="time" name="hour" #hour="ngModel" [(ngModel)]="flightService.selectedFlight.hour" placeholder="Enter your Date">
 						</div>
+						<div class="input-field col s12">
+							<input type="text" name="cost" #cost="ngModel" [(ngModel)]="flightService.selectedFlight.cost" placeholder="Enter cost">
+						</div>
+ 				 			
 						<div class="card-action">
 							<div class="input-field col s12">
-								<button class="btn" (click)="resetForm(flightForm)">Clean</button>
 								<button class="btn right">Save</button>
-
 							</div>
 						</div>
 
@@ -29,7 +32,30 @@
 			</div>
 		</div>	
 		<div class="col s7">
-			
+			<table>	
+				<thead>
+					<th>Origin</th>
+					<th>Destination</th>
+					<th>Date</th>
+					<th>Hour</th>
+					<th>Cost</th>
+					<th>Operations</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let flight of flightService.flights">
+						<td>{{flight.origin}}</td>
+						<td>{{flight.destination}}</td>
+						<td>{{flight.date}}</td>
+						<td>{{flight.hour}}</td>
+						<td>{{flight.cost}}</td>
+						<td>
+							<a (click)="editFlight(flight)"><i class="material-icons">edit</i></a>
+							<a (click)="deleteFlight(flight._id)"><i class="material-icons">delete</i></a>	
+						</td>	
+						
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

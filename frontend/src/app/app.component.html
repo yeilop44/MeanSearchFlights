@@ -1,9 +1,27 @@
 
 <nav class="nav-wrapper blue">
-  <div class="container">
-    <a href="/" class="brand-logo">SEARCH FLIGHTS</a>  
-  </div>
-  
+	<div class="container">
+    	<a href="/" class="brand-logo">SEARCH FLIGHTS</a>  
+  	</div> 
 </nav>
 
-<app-flights></app-flights>
+
+
+<nav class="navbar navbar-dark blue">
+	<div class="nav-wrapper">
+  		<ul id="nav-mobile" class="left hide-on-med-and-down">
+		    <li><a routerLink="/">Search</a></li>
+		    <li><a routerLink="flights">Flights</a></li>
+  		</ul>
+  	</div>
+</nav>
+<router-outlet></router-outlet> 
+<app-search></app-search>
+
+
+
+
+
+
+
+

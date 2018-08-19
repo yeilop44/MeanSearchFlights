@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const FlightSchema = new Schema({
-	name: { type: String, required: true},
-	position: {type: String, required: true},
-	office: {type: String, required: true},
-	salary: {type: Number, requerid: true}
+	origin: { type: String, required: true},
+	destination: {type: String, required: true},
+	date: {type: String, required: true},
+	hour: {type: String, requerid: true},
+	cost: {type: Number, requerid: true}
 })
 
 

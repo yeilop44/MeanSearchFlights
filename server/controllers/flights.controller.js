@@ -14,9 +14,21 @@ flightCtrl.getFlight = async(req, res) => {
 	res.json(flights);
 } 
 
+//getMultiParamas
+flightCtrl.getFlightMulti = async(req, res) => {
+	const flights = await Flight.find({origin:req.params.origin, destination:req.params.destination, date:req.params.date});
+	res.json(flights);
+} 
+
 //post
 flightCtrl.createFlights = async (req, res) => {
-	const flight = new Flight(req.body);
+	const flight = new Flight({
+		origin: req.body.origin,
+		destination: req.body.destination,
+		date: req.body.date,
+		hour: req.body.hour,
+		cost: req.body.cost
+	});
 	await flight.save()
 	res.json({
 		'status': 'Flight saved'
@@ -27,10 +39,11 @@ flightCtrl.createFlights = async (req, res) => {
 flightCtrl.editFlight = async (req, res) =>{
 	const { id } = req.params;
 	const flight = {
-		name: req.body.name,
-		position: req.body.position,
-		office: req.body.office,
-		salary: req.body.salary
+		origin: req.body.origin,
+		destination: req.body.destination,
+		date: req.body.date,
+		hour: req.body.hour,
+		cost: req.body.cost
 	}
 
 	await Flight.findByIdAndUpdate(id, {$set: flight}, {new: true});
