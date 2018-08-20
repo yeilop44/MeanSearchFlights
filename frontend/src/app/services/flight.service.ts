@@ -24,6 +24,13 @@ export class FlightService {
     return this.http.get(this.URL_API+ `/${_id}`);
   }
 
+
+  //search fligths by ORIGIN
+  getFlightByOrigin(origin: string) {
+    return this.http.get(this.URL_API+ '/origin'+`/${origin}`);
+  }
+
+
   //search fligths by ORIGIN, DESTINAION and DATE
   getFlightMultiParams(origin: string, destination: string, date: string) {
     return this.http.get(this.URL_API+ '/origin'+`/${origin}`+'/destination'+`/${destination}`+'/date'+`/${date}`);

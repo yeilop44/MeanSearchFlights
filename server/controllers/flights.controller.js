@@ -8,11 +8,18 @@ flightCtrl.getFlights = async(req, res) => {
 	res.json(flights);
 } 
 
-//getOne
+//getById
 flightCtrl.getFlight = async(req, res) => {
 	const flights = await Flight.findById(req.params.id);
 	res.json(flights);
 } 
+
+//getByOrigin
+flightCtrl.getFlightByOrigin = async(req, res) => {
+	const flights = await Flight.find({origin:req.params.origin});
+	res.json(flights);
+} 
+
 
 //getMultiParamas
 flightCtrl.getFlightMulti = async(req, res) => {
