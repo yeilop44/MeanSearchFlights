@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" >
 	<div class="row">
 		<div class="col s5">
 			<div class="card-content">
 				<label>Fly From</label>
-				  <select class="browser-default" (click)="getFlights()" [(ngModel)]= "origin">
+				  <select class="browser-default" (click)="getFlights()" [(ngModel)]= "origin" (change)="resetSelectDestination()">
 				  	<option value="" disabled selected>Choose</option>
 				    <option *ngFor="let item of filterUniqueOrigin" value="{{item.origin}}">{{item.origin}}</option>
 				  </select>	
@@ -29,19 +29,18 @@
 			</div>
 		</div> 
 	</div>
-
-	
+	<p id="demo"></p>
 
 </div>
 
  <ul class="collection with-header" *ngIf="isAdvancedSearch">
-   <li class="collection-header"><h4>Flights</h4></li>	
-    <a class="collection-item avatar" *ngFor="let item of listAdvancedSearch">
+   <li class="collection-header"><h4>Available Flights</h4></li>	
+    <a class="collection-item avatar" *ngFor="let item of listAdvancedSearch" (click)="showMaintenance()">
       <i class="material-icons circle">airplanemode_active</i>
-      <span class="title">{{item.origin}} to {{item.destination}}</span>
-      <h5>Hour: {{item.hour}}</h5>	
+      <span class="title">From {{item.origin}} to {{item.destination}}</span>
+      <h6>Date: {{item.date}}</h6>
+      <h5>Hour: <b>{{item.hour}}</b></h5>
       <h6>Cost (COP): {{item.cost}}</h6>
-      <a class="secondary-content" ><i class="material-icons"></i></a>
     </a>
     
   </ul>

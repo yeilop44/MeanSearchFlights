@@ -3,6 +3,7 @@ import { FlightService } from '../../services/flight.service';
 import { NgForm } from '@angular/forms';
 import { Flight } from '../../models/flight';
 
+
 declare var M: any;
 
 @Component({
@@ -17,6 +18,7 @@ export class FlightsComponent implements OnInit {
   constructor(private flightService: FlightService) { }
 
   ngOnInit() {
+    this.disableDates();
     this.getFlights();
   }
 
@@ -59,11 +61,7 @@ export class FlightsComponent implements OnInit {
         this.getFlights();
       });
     }
-
-
-    
   }
-
 
   //clean the form
   resetForm(form?: NgForm){
@@ -73,5 +71,11 @@ export class FlightsComponent implements OnInit {
 
   	}
   }
+
+  disableDates(){
+     //disable dates before today
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("date")[0].setAttribute('min', today);
+    }
 
 }

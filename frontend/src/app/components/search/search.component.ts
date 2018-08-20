@@ -12,6 +12,7 @@ import * as moment from 'moment';
 })
 export class SearchComponent implements OnInit {
 
+isSearchOrigin: boolean = false;
 isAdvancedSearch: boolean = false;
 
 filterUniqueOrigin = [];
@@ -30,59 +31,64 @@ listAdvancedSearch: any;
   constructor(private flightService: FlightService) { }
 
   ngOnInit() {
-    //disable dates before today
-    var today = new Date().toISOString().split('T')[0];
-    document.getElementsByName("setTodaysDate")[0].setAttribute('min', today);
+    this.disableDates();
   }
   
   //search all fligths
   getFlights(){
-    this.flightService.getFlights()
-      .subscribe(res =>{
-        this.listFlights = res;
-        console.log(this.listFlights);
-        // Keep an array of elements whose id is added in filtered array
-        var elementId = [];
-        this.filterUniqueOrigin = this.listFlights .filter(el => {
-          if (elementId.indexOf(el.origin) === -1) {
-            // If not present in array, then add it
-            elementId.push(el.origin);
-            return true;
-          } else {
-            // Already present in array, don't add it
-            return false;
-          }
-          });
-      });     
-  }
-
-//search fligths by ORIGIN
-  getFlightByOrigin(origin: string){
-      this.flightService.getFlightByOrigin(this.origin)
-        .subscribe(res => {
-          this.listFlightsByOrigin = res;
-          console.log(this.listFlightsByOrigin);
+    if(this.isSearchOrigin == false){
+      this.flightService.getFlights()
+        .subscribe(res =>{
+          this.listFlights = res;
+          console.log(this.listFlights);
+          // Keep an array of elements whose id is added in filtered array
           var elementId = [];
-          this.filterUniqueDestination = this.listFlightsByOrigin.filter(el => {
-            if (elementId.indexOf(el.destination) === -1) {
+          this.filterUniqueOrigin = this.listFlights .filter(el => {
+            if (elementId.indexOf(el.origin) === -1) {
               // If not present in array, then add it
-              elementId.push(el.destination);
+              elementId.push(el.origin);
               return true;
             } else {
               // Already present in array, don't add it
               return false;
             }
-            });
+          });
         });
+        this.origin = "";     
+        this.isSearchOrigin = true;
     }
+  }
+
+//search fligths by ORIGIN
+  getFlightByOrigin(origin: string){
+    
+    if(this.origin != null){
+         this.flightService.getFlightByOrigin(this.origin)
+          .subscribe(res => {
+            this.listFlightsByOrigin = res;
+            console.log(this.listFlightsByOrigin);
+            var elementId = [];
+            this.filterUniqueDestination = this.listFlightsByOrigin.filter(el => {
+              if (elementId.indexOf(el.destination) === -1) {
+                // If not present in array, then add it
+                elementId.push(el.destination);
+                return true;
+              } else {
+                // Already present in array, don't add it
+                return false;
+              }
+              });
+          });
+    }
+  }
 
   //search fligths by ORIGIN, DESTINAION and DATE
   getFlightMultiParams(origin: string, destination: string, date: string){
+
       this.flightService.getFlightMultiParams(this.origin, this.destination, this.date)
         .subscribe(res => {
           this.listAdvancedSearch = res;
             console.log(this.listAdvancedSearch);
-
             for(let i=0; i<this.listAdvancedSearch.length;i++){
 
               //check that the flight is on the weekend 
@@ -101,9 +107,16 @@ listAdvancedSearch: any;
               }
             }         
         });
-
+        this.isAdvancedSearch = true;
         this.clearSearch();
-        this.isAdvancedSearch = true; 
+        this.resetSelectDestination();
+         
+    }
+
+    disableDates(){
+     //disable dates before today
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("setTodaysDate")[0].setAttribute('min', today);
     }
 
     clearSearch(){
@@ -112,4 +125,10 @@ listAdvancedSearch: any;
       this.date = "";
     }
 
+    showMaintenance(){
+      alert("Book flight is under development");
+    }
+
+    resetSelectDestination(){
+    this.filterUniqueDestination = []; 
 }

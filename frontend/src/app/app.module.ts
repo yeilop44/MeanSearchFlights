@@ -12,6 +12,10 @@ const appRoutes: Routes = [
   {
     path: 'flights',
     component:FlightsComponent
+  },
+  {
+    path: 'search',
+    component:SearchComponent
   }
   
 ];
