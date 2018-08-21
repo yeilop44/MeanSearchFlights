@@ -19,9 +19,9 @@ filterUniqueOrigin = [];
 filterUniqueDestination = [];
 unique: any;
 
-origin: string;
-destination: string;
-date: string;
+origin: string ='';
+destination: string = '';
+date: string='';
 
 listFlights: any;
 listFlightsByOrigin: any;
@@ -84,34 +84,44 @@ listAdvancedSearch: any;
 
   //search fligths by ORIGIN, DESTINAION and DATE
   getFlightMultiParams(origin: string, destination: string, date: string){
+    if(this.origin=='' || this.destination =='' || this.date==''){
+       alert("any of the search fields is empty");
+     }else{
 
       this.flightService.getFlightMultiParams(this.origin, this.destination, this.date)
         .subscribe(res => {
           this.listAdvancedSearch = res;
-            console.log(this.listAdvancedSearch);
+          console.log(this.listAdvancedSearch);
+
+          if(this.listAdvancedSearch!=(null||0)){
             for(let i=0; i<this.listAdvancedSearch.length;i++){
 
-              //check that the flight is on the weekend 
+            //check that the flight is on the weekend 
               var dayOfDate = moment(this.listAdvancedSearch[i].date).format('dddd');
               if(dayOfDate== 'Saturday' || dayOfDate== 'Sunday' ){
-                 this.listAdvancedSearch[i].cost = this.listAdvancedSearch[i].cost + 60000;
-                 console.log("your flight is more expensive because today is a weekend("+ dayOfDate +") NEW COST: " + this.listAdvancedSearch[i].cost);
+                this.listAdvancedSearch[i].cost = this.listAdvancedSearch[i].cost + 60000;
+                console.log("your flight is more expensive because today is a weekend("+ dayOfDate +") NEW COST: " + this.listAdvancedSearch[i].cost);
               }
 
               //check that the flight is in the morning
               var midday = '12:00';
               var hourFlight = this.listAdvancedSearch[i].hour;
               if(hourFlight < midday){
-                this.listAdvancedSearch[i].cost = this.listAdvancedSearch[i].cost + 30000;
-                console.log("your flight is more expensive because it is in the morning ("+ hourFlight+") NEW COST: "+this.listAdvancedSearch[i].cost);  
-              }
-            }         
+              this.listAdvancedSearch[i].cost = this.listAdvancedSearch[i].cost + 30000;
+              console.log("your flight is more expensive because it is in the morning ("+ hourFlight+") NEW COST: "+this.listAdvancedSearch[i].cost);  
+            }
+          } 
+            this.isAdvancedSearch = true;
+
+          }else{
+            alert("there aren't flights with these search parameters");
+          }   
         });
-        this.isAdvancedSearch = true;
-        this.clearSearch();
-        this.resetSelectDestination();
-         
-    }
+          this.clearSearch();
+          this.resetSelectDestination(); 
+      }
+
+  }
 
     disableDates(){
      //disable dates before today
@@ -130,5 +140,7 @@ listAdvancedSearch: any;
     }
 
     resetSelectDestination(){
-    this.filterUniqueDestination = []; 
+       this.filterUniqueDestination = []; 
+    }
+   
 }
