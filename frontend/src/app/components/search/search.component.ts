@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { Flight } from '../../models/flight';
+import { Book } from '../../models/book';
 import * as moment from 'moment';
+import { NgForm } from '@angular/forms';
 
-
+declare var M: any;
 
 @Component({
   selector: 'app-search',
@@ -12,6 +14,7 @@ import * as moment from 'moment';
 })
 export class SearchComponent implements OnInit {
 
+isFormSearch: boolean = true;
 isSearchOrigin: boolean = false;
 isAdvancedSearch: boolean = false;
 
@@ -28,10 +31,37 @@ listFlightsByOrigin: any;
 listAdvancedSearch: any;
 
 
+flight: Flight = {
+  _id: '',
+  origin: '',
+  destination: '',
+  date: '',
+  hour: '',
+  cost: 0
+
+};
+
+
+
+book: Book = {
+  _id: '',
+  idBook: '',
+  dateBook: '',
+  originBook: this.flight.origin,
+  destinationBook: this.flight.destination,
+  dateFlight:this.flight.date,
+  hourFlight: this.flight.hour,
+  costFlight: this.flight.cost
+
+};
+
+showFormBook:boolean = false;
+
+
   constructor(private flightService: FlightService) { }
 
   ngOnInit() {
-    this.disableDates();
+    //this.disableDates();
   }
   
   //search all fligths
@@ -135,12 +165,47 @@ listAdvancedSearch: any;
       this.date = "";
     }
 
-    showMaintenance(){
-      alert("Book flight is under development");
+    showDataToBook(flight: Flight){
+      
+      console.log(flight.hour);
+
+      this.flight ={
+        _id: flight._id,
+        origin: flight.origin,
+        destination: flight.destination,
+        date: flight.date,
+        hour: flight.hour,
+        cost: flight.cost
+      }
+      this.showFormBook = true;
+      this.isFormSearch = false;
+
     }
 
     resetSelectDestination(){
        this.filterUniqueDestination = []; 
+    }
+
+
+    addBook(){
+        let dateNow = new Date();
+       
+      this.book= {
+      _id: '',
+      idBook: this.book.idBook,
+      dateBook: dateNow.toString(),
+      originBook: this.flight.origin,
+      destinationBook: this.flight.destination,
+      dateFlight:this.flight.date,
+      hourFlight: this.flight.hour,
+      costFlight: this.flight.cost
+      };
+
+       console.log(this.book);
+       this.flightService.postBook(this.book)
+       .subscribe(res=>{
+       M.toast({html: 'Book Saved'});
+       });
     }
    
 }

@@ -2,6 +2,7 @@ const Flight = require('../models/flights');
 
 const flightCtrl = {};
 
+
 //getAll
 flightCtrl.getFlights = async(req, res) => {
 	const flights = await Flight.find();
@@ -62,5 +63,7 @@ flightCtrl.deleteFlight = async (req, res) =>{
 	await Flight.findByIdAndRemove(req.params.id);
 	res.json({status: 'Flight deleted'});
 }
+
+
 
 module.exports = flightCtrl;

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Flight } from '../../models/flight';
 
 
+
 declare var M: any;
 
 @Component({

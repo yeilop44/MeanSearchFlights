@@ -13,7 +13,7 @@ export class Flight {
 
 	_id: string;
 	origin: string;
-	destination: string
+	destination: string;
 	date: string;
 	hour: string;
 	cost: number;

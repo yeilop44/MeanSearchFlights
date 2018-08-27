@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Flight } from '../models/flight';
+import { Book } from '../models/book';
 
 
 @Injectable({
@@ -10,7 +11,10 @@ export class FlightService {
 
 	selectedFlight: Flight;
 	flights: Flight[];
-	readonly URL_API = 'http://localhost:3000/api/flights';
+
+  
+  readonly URL_API = 'http://localhost:3000/api/flights';
+  readonly URL_API2 = 'http://localhost:3000/api/books';
 
   constructor(private http: HttpClient) { 
   	this.selectedFlight = new Flight();
@@ -45,6 +49,26 @@ export class FlightService {
   }
   deleteFlights(_id: string) {
   	return this.http.delete(this.URL_API + `/${_id}`);
+  }
+
+
+  postBook(book: Book) {
+
+
+    let x: Book = {
+       _id: book._id,
+      idBook: book.idBook,     
+      dateBook: book.dateBook,
+      originBook: book.originBook,
+      destinationBook: book.destinationBook,
+      dateFlight: book.dateFlight,
+      hourFlight: book.hourFlight,
+      costFlight: book.costFlight
+      };
+
+
+      
+    return this.http.post(this.URL_API2, x);
   }
 
 }
