@@ -9,6 +9,12 @@ bookCtrl.getBooks = async(req, res) => {
 	res.json(books);
 } 
 
+//getById
+bookCtrl.getBooksByIdBook = async(req, res) => {
+	const books = await Book.find({idBook:req.params.idBook});
+	res.json(books);
+} 
+
 
 //post
 bookCtrl.createBooks = async (req, res) => {

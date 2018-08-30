@@ -1,0 +1,36 @@
+<form action="">
+	<div class="row">
+		<div class="input-field col s3">
+			<input type="text" name="origin"   placeholder="Enter your Id" [(ngModel)]="idBook">
+			<button class="btn waves-effect waves-light" (click)="getBookById(idBook)">Search Book
+		   		<i class="material-icons right">send</i>
+		  	</button>
+		</div>
+	</div>	
+</form>
+
+
+<div class="col s12" *ngIf="isShowBook">
+	<table>	
+		<thead>
+			<th>Date Booking</th>
+			<th>From</th>
+			<th>To</th>
+			<th>Date Flight</th>
+			<th>Hour Flight</th>
+			<th>Cost Flight</th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let book of books">
+				<td>{{book.dateBook}}</td>
+				<td>{{book.originBook}}</td>
+				<td>{{book.destinationBook}}</td>
+				<td>{{book.dateFlight}}</td>
+				<td>{{book.hourFlight}}</td>
+				<td>{{book.costFlight}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+

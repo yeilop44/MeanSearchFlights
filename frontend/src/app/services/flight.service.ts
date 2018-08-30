@@ -65,10 +65,13 @@ export class FlightService {
       hourFlight: book.hourFlight,
       costFlight: book.costFlight
       };
-
-
-      
     return this.http.post(this.URL_API2, x);
+  }
+
+
+
+  getBook(idBook: string) {
+    return this.http.get(this.URL_API2+ `/${idBook}`);
   }
 
 }

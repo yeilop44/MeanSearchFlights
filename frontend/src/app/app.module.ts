@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FlightsComponent } from './components/flights/flights.component';
 import { SearchComponent } from './components/search/search.component';
+import { BookComponent } from './components/book/book.component';
 
 const appRoutes: Routes = [
   {
@@ -16,6 +17,10 @@ const appRoutes: Routes = [
   {
     path: 'search',
     component:SearchComponent
+  },
+  {
+    path: 'books',
+    component:BookComponent
   }
   
 ];
@@ -25,7 +30,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     FlightsComponent,
-    SearchComponent
+    SearchComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
