@@ -20,6 +20,7 @@ bookCtrl.getBooksByIdBook = async(req, res) => {
 bookCtrl.createBooks = async (req, res) => {
 	const book = new Book({
 		idBook: req.body.idBook,
+		nameBook: req.body.nameBook,
 		dateBook: req.body.dateBook,
 		originBook: req.body.originBook,
 		destinationBook: req.body.destinationBook,

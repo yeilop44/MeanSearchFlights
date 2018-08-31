@@ -1,0 +1,83 @@
+select
+{
+	padding: 0 25px;
+	border-radius: 25px 25px 25px 25px;
+
+}
+
+input[type="date"], input[type="text"]
+{
+	padding: 0 25px;
+	border-radius: 25px 25px 25px 25px;
+	background: white;
+
+}
+
+label{
+	color:black;
+	 font-weight: bold;
+	 
+
+}
+table{
+	margin-left:  40px;
+}
+td{
+	background: GhostWhite;
+}
+
+th{
+	background: DodgerBlue;
+	color:  white;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	
+}
+
+#button
+{
+	margin-top: 18px; 
+	border-radius: 25px 25px 25px 25px;
+}
+
+
+#search{
+	margin-top:  30px;
+	margin-left: 30px;
+	margin-right: 30px;
+	padding-right: 10px;
+	padding-left: 50px;
+	padding-top: 30px;
+	padding-bottom: 30px; 
+	background: GhostWhite;
+	border-radius: 5px 5px 5px 5px;
+}
+
+#resulSearch{
+	margin-left: 30px;
+	margin-right: 370px;
+	
+	
+}
+
+
+
+#divAvailable{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background: DodgerBlue;
+	color:white;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+
+}
+#form{
+	padding-top: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	background: GhostWhite;
+	border-radius: 5px 5px 5px 5px;
+
+}
+
+

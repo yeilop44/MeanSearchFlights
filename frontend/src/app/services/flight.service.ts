@@ -57,7 +57,9 @@ export class FlightService {
 
     let x: Book = {
        _id: book._id,
-      idBook: book.idBook,     
+
+      idBook: book.idBook,
+       nameBook: book.nameBook,     
       dateBook: book.dateBook,
       originBook: book.originBook,
       destinationBook: book.destinationBook,

@@ -1,7 +1,7 @@
 
 export class Book {
 
-constructor(_id='', idBook='', dateBook='', originBook='', destinationBook='', dateFlight='',hourFlight='', costFlight=0){
+constructor(_id='', nameBook='', idBook='', dateBook='', originBook='', destinationBook='', dateFlight='',hourFlight='', costFlight=0){
 		this._id = _id;
 		this.idBook = idBook;
 		this.dateBook = dateBook;
@@ -16,6 +16,7 @@ constructor(_id='', idBook='', dateBook='', originBook='', destinationBook='', d
 
 	_id: string;
 	idBook: string;
+	nameBook: string;
 	dateBook: string;
 	originBook: string;
 	destinationBook: string;

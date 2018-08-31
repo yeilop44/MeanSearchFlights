@@ -1,6 +1,6 @@
-<div class="container" *ngIf="isFormSearch" >
-	<div class="row">
-		<div class="col s5">
+<div id="search" class="container" *ngIf="isFormSearch" >
+	<div  class="row">
+		<div   class="col s5">
 			<div class="card-content">
 				<label>Fly From</label>
 				  <select class="browser-default" (click)="getFlights()" [(ngModel)]= "origin" (change)="resetSelectDestination()">
@@ -18,24 +18,22 @@
 			</div>
 		</div>	
 
-		<div class="col s5">
+		<div class="col s5" style="padding-left: 60px; margin-left: 10px">
 			<div class="card-content">
 				<label>Select Date</label>
 				<input type="date" name="setTodaysDate" [(ngModel)]="date">
 			</div>
 			<div class="card-content">
-				<button class="btn waves-effect waves-light" (click)="getFlightMultiParams(origin, destination, date)" 		name="action">Search Flight
+				<button class="btn waves-effect waves-light" (click)="getFlightMultiParams(origin, destination, date)" 	id="button"	name="action">Search Flight
    				<i class="material-icons right">send</i>
   				</button>
 			</div>
 		</div> 
 	</div>
-	
-
 </div>
 
- <ul class="collection with-header" *ngIf="isAdvancedSearch">
-   <div class="card-panel teal lighten-2 white-text text-darken-2"><h4>Available Flights</h4></div>	
+ <ul id="resulSearch" class="collection with-header" *ngIf="isAdvancedSearch">
+   <div id="divAvailable"><h4>Available Flights</h4></div>	
     <a class="collection-item avatar" *ngFor="let flight of listAdvancedSearch" (click)="showDataToBook(flight)">
       <i class="material-icons circle">airplanemode_active</i>
       <span class="title">From {{flight.origin}} to {{flight.destination}}</span>
@@ -46,46 +44,54 @@
   </ul>
 
 
-  <div  *ngIf="showFormBook">
-  	<div class="row">	
-  		 
-		<div class="input-field col s9">
-			<div class="card-panel teal lighten-2">
-				<span class="white-text text-darken-2"><h4>Personal Information</h4></span>	
-			</div>
-			<input type="text" name="originBook" [(ngModel)]="book.idBook" placeholder="Enter your ID">
-			<button class="btn waves-effect waves-light" (click)="addBook(book)">book flight</button>
-		</div>
-		<div class="input-field col s3">
-			<table>
-        <thead>
-          <tr>
-              <th class="card-panel teal red lighten-2 white-text text-darken-2" style="text-align: center;">  		Your Flight
-              </th>
-          </tr>
-        </thead>
 
-        <tbody>
-          <tr>
-            <td ><b>{{flight.origin}} => {{flight.destination}}</b>
-            </td>
-          </tr>
-          <tr>
-            <td>{{flight.date}}</td>
-          </tr>
-          <tr>
-            <td>{{flight.hour}}</td>
-          </tr>
-          <tr>
-            <td><b>Total cost: {{flight.cost}}</b></td>
-          </tr>
-          
-        </tbody>
-      </table>
+
+
+<div   class="container" *ngIf="showFormBook">
+	<div class="row">
+		<div  class="col s8">
+			<form action="">
+					<h4 >Personal Information</h4>
+					<input type="text" name="idBook" [(ngModel)]="book.idBook" placeholder="Enter your ID">
+					<input type="text" name="nameBook" [(ngModel)]="book.nameBook" placeholder="Enter your Name">
+					<button class="btn waves-effect waves-light" id="button" (click)="getBookById(book.idBook)">book flight</button>
+			</form>
+		</div>
+
+		<div  class="input-field col s3"></div>
+		<div  class="input-field col s3">
+			<table >
+		        <thead>
+		          <tr>
+		              <th>Your Flight</th>
+		          </tr>
+		        </thead>
+
+		        <tbody>
+		          <tr>
+		            <td ><b>{{flight.origin}} => {{flight.destination}}</b>
+		            </td>
+		          </tr>
+		          <tr>
+		            <td>{{flight.date}}</td>
+		          </tr>
+		          <tr>
+		            <td>{{flight.hour}}</td>
+		          </tr>
+		          <tr>
+		            <td><b>Total cost: {{flight.cost}}</b></td>
+		          </tr> 
+		        </tbody>
+	      </table>
 		</div>
   	</div>
+</div>
 
-  </div>
+
+
+
+
+
 
   
 

@@ -1,18 +1,27 @@
-<form action="">
-	<div class="row">
-		<div class="input-field col s3">
-			<input type="text" name="origin"   placeholder="Enter your Id" [(ngModel)]="idBook">
-			<button class="btn waves-effect waves-light" (click)="getBookById(idBook)">Search Book
-		   		<i class="material-icons right">send</i>
-		  	</button>
-		</div>
-	</div>	
-</form>
+<div  clas="container">	
+	<form action="">
+		<div id="book" class="row">
+			<div class="input-field col s3">
+				<div   class="card-content">
+					<label>Id</label>
+					<input type="text" name="origin"   placeholder="Enter your Id" [(ngModel)]="idBook">
+					<button class="btn waves-effect waves-light" (click)="getBookById(idBook)">Search Book
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+				
+			</div>
+		</div>	
+	</form>
+</div>
 
 
-<div class="col s12" *ngIf="isShowBook">
+
+
+<div id="tableBooks"class="col s12" *ngIf="isShowBook">
 	<table>	
 		<thead>
+			<th>Name</th>
 			<th>Date Booking</th>
 			<th>From</th>
 			<th>To</th>
@@ -22,6 +31,7 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let book of books">
+				<td>{{book.nameBook}}</td>
 				<td>{{book.dateBook}}</td>
 				<td>{{book.originBook}}</td>
 				<td>{{book.destinationBook}}</td>

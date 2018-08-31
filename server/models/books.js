@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const BookSchema = new Schema({
 	idBook: { type: String, required: true},
+	nameBook: { type: String, required: true},
 	dateBook: { type: String, required: true},
 	destinationBook: {type: String, required: true},
 	originBook: {type: String, required: true},

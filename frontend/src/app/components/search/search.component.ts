@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit {
 isFormSearch: boolean = true;
 isSearchOrigin: boolean = false;
 isAdvancedSearch: boolean = false;
+isBookThisDate: boolean = false;
 
 filterUniqueOrigin = [];
 filterUniqueDestination = [];
@@ -27,6 +28,7 @@ destination: string = '';
 date: string='';
 
 listFlights: any;
+listBooks: any;
 listFlightsByOrigin: any;
 listAdvancedSearch: any;
 
@@ -46,6 +48,7 @@ flight: Flight = {
 book: Book = {
   _id: '',
   idBook: '',
+  nameBook: '',
   dateBook: '',
   originBook: this.flight.origin,
   destinationBook: this.flight.destination,
@@ -62,6 +65,8 @@ showFormBook:boolean = false;
 
   ngOnInit() {
     //this.disableDates();
+    console.log(this.isBookThisDate);
+    
   }
   
   //search all fligths
@@ -166,9 +171,7 @@ showFormBook:boolean = false;
     }
 
     showDataToBook(flight: Flight){
-      
       console.log(flight.hour);
-
       this.flight ={
         _id: flight._id,
         origin: flight.origin,
@@ -186,26 +189,59 @@ showFormBook:boolean = false;
        this.filterUniqueDestination = []; 
     }
 
-
+    //postBook
     addBook(){
-        let dateNow = new Date();
+       let dateNow = new Date();
        
+       //check if have book now
       this.book= {
-      _id: '',
-      idBook: this.book.idBook,
-      dateBook: dateNow.toString(),
-      originBook: this.flight.origin,
-      destinationBook: this.flight.destination,
-      dateFlight:this.flight.date,
-      hourFlight: this.flight.hour,
-      costFlight: this.flight.cost
-      };
+          _id: '',
+          idBook: this.book.idBook,
+          nameBook: this.book.nameBook,
+          dateBook: dateNow.toString(),
+          originBook: this.flight.origin,
+          destinationBook: this.flight.destination,
+          dateFlight:this.flight.date,
+          hourFlight: this.flight.hour,
+          costFlight: this.flight.cost
+          };
 
-       console.log(this.book);
-       this.flightService.postBook(this.book)
-       .subscribe(res=>{
-       M.toast({html: 'Book Saved'});
-       });
+           console.log(this.book);
+           this.flightService.postBook(this.book)
+             .subscribe(res=>{
+             M.toast({html: 'Book Saved'});
+             });
+    }
+
+    getBookById(idBook: string){
+      this.flightService.getBook(this.book.idBook)
+      .subscribe(res=>{
+        this.listBooks = res;
+        console.log(this.listBooks);
+
+         let dateNow = new Date();
+         let formatDateNow = moment(dateNow).format('L');
+          console.log("fehca actual: "+formatDateNow);
+
+         for(let i=0; i<this.listBooks.length; i++){
+            let formatDateBook = moment(this.listBooks[i].dateBook).format('L');
+            console.log(formatDateBook);
+            if(formatDateBook.toString() == formatDateNow.toString()){
+              console.log("las dos fechas coinciden");
+              this.isBookThisDate = true;
+              console.log(this.isBookThisDate);
+            }
+          }
+
+           if(this.isBookThisDate == false){
+                this.addBook();
+            }else{
+              M.toast({html: 'you already have an booking registered'});
+              this.book.idBook ='';
+              this.book.nameBook ='';
+              this.isBookThisDate = false;
+            }
+      });  
     }
    
 }
