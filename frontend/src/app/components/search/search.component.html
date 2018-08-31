@@ -21,7 +21,7 @@
 		<div class="col s5" style="padding-left: 60px; margin-left: 10px">
 			<div class="card-content">
 				<label>Select Date</label>
-				<input type="date" name="setTodaysDate" [(ngModel)]="date">
+				<input type="date" name="date" [(ngModel)]="date">
 			</div>
 			<div class="card-content">
 				<button class="btn waves-effect waves-light" (click)="getFlightMultiParams(origin, destination, date)" 	id="button"	name="action">Search Flight
@@ -46,20 +46,21 @@
 
 
 
-
-<div   class="container" *ngIf="showFormBook">
-	<div class="row">
-		<div  class="col s8">
+<div class="row" *ngIf="showFormBook">
+	<div   class="container" >
+		<div  id="formPersoInfo" class="col s8">
 			<form action="">
-					<h4 >Personal Information</h4>
+					<h4 id="titlePersoInfo">Personal Information</h4>
 					<input type="text" name="idBook" [(ngModel)]="book.idBook" placeholder="Enter your ID">
 					<input type="text" name="nameBook" [(ngModel)]="book.nameBook" placeholder="Enter your Name">
-					<button class="btn waves-effect waves-light" id="button" (click)="getBookById(book.idBook)">book flight</button>
+					<button class="btn waves-effect waves-light" id="button" (click)="getBookById(book.idBook)">book flight 
+						<i class="material-icons right">send</i>
+					</button>
 			</form>
 		</div>
+  	</div>
 
-		<div  class="input-field col s3"></div>
-		<div  class="input-field col s3">
+	<div  class="input-field col s3">
 			<table >
 		        <thead>
 		          <tr>
@@ -76,16 +77,23 @@
 		            <td>{{flight.date}}</td>
 		          </tr>
 		          <tr>
-		            <td>{{flight.hour}}</td>
+		            <td><b>{{flight.hour}}</b></td>
 		          </tr>
 		          <tr>
-		            <td><b>Total cost: {{flight.cost}}</b></td>
+		            <td><h5>{{flight.cost}}</h5></td>
 		          </tr> 
 		        </tbody>
 	      </table>
 		</div>
-  	</div>
+
+
 </div>
+<div *ngIf="isButtonChangeSearch">
+	<button id="buttonChangeSearch" class="btn waves-effect waves-light"  (click)="changeSearch()">Change Search
+		<i class="material-icons right">send</i>
+	</button>
+</div>
+
 
 
 

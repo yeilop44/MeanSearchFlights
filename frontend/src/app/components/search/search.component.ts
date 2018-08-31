@@ -18,6 +18,7 @@ isFormSearch: boolean = true;
 isSearchOrigin: boolean = false;
 isAdvancedSearch: boolean = false;
 isBookThisDate: boolean = false;
+isButtonChangeSearch:boolean = false;
 
 filterUniqueOrigin = [];
 filterUniqueDestination = [];
@@ -64,8 +65,6 @@ showFormBook:boolean = false;
   constructor(private flightService: FlightService) { }
 
   ngOnInit() {
-    //this.disableDates();
-    console.log(this.isBookThisDate);
     
   }
   
@@ -115,6 +114,7 @@ showFormBook:boolean = false;
               });
           });
     }
+     this.disableDates();
   }
 
   //search fligths by ORIGIN, DESTINAION and DATE
@@ -158,11 +158,6 @@ showFormBook:boolean = false;
 
   }
 
-    disableDates(){
-     //disable dates before today
-    var today = new Date().toISOString().split('T')[0];
-    document.getElementsByName("setTodaysDate")[0].setAttribute('min', today);
-    }
 
     clearSearch(){
       this.origin = "";
@@ -182,6 +177,7 @@ showFormBook:boolean = false;
       }
       this.showFormBook = true;
       this.isFormSearch = false;
+      this.isButtonChangeSearch = true;
 
     }
 
@@ -242,6 +238,21 @@ showFormBook:boolean = false;
               this.isBookThisDate = false;
             }
       });  
+    }
+
+
+    disableDates(){
+     //disable dates before today
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("date")[0].setAttribute('min', today);
+    }
+
+
+    changeSearch(){
+      this.isFormSearch = true;
+      this.isAdvancedSearch = false;
+      this.showFormBook = false;
+      this.isButtonChangeSearch = false;
     }
    
 }
