@@ -28,12 +28,10 @@ export class FlightService {
     return this.http.get(this.URL_API+ `/${_id}`);
   }
 
-
   //search fligths by ORIGIN
   getFlightByOrigin(origin: string) {
     return this.http.get(this.URL_API+ '/origin'+`/${origin}`);
   }
-
 
   //search fligths by ORIGIN, DESTINAION and DATE
   getFlightMultiParams(origin: string, destination: string, date: string) {
@@ -53,8 +51,6 @@ export class FlightService {
 
 
   postBook(book: Book) {
-
-
     let x: Book = {
        _id: book._id,
 
@@ -69,8 +65,6 @@ export class FlightService {
       };
     return this.http.post(this.URL_API2, x);
   }
-
-
 
   getBook(idBook: string) {
     return this.http.get(this.URL_API2+ `/${idBook}`);
