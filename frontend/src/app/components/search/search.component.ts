@@ -44,8 +44,6 @@ flight: Flight = {
 
 };
 
-
-
 book: Book = {
   _id: '',
   idBook: '',
@@ -60,7 +58,6 @@ book: Book = {
 };
 
 showFormBook:boolean = false;
-
 
   constructor(private flightService: FlightService) { }
 
@@ -158,7 +155,6 @@ showFormBook:boolean = false;
 
   }
 
-
     clearSearch(){
       this.origin = "";
       this.destination = "";
@@ -187,8 +183,7 @@ showFormBook:boolean = false;
 
     //postBook
     addBook(){
-       let dateNow = new Date();
-       
+       let dateNow = new Date();  
        //check if have book now
       this.book= {
           _id: '',
@@ -240,13 +235,11 @@ showFormBook:boolean = false;
       });  
     }
 
-
     disableDates(){
      //disable dates before today
     var today = new Date().toISOString().split('T')[0];
     document.getElementsByName("date")[0].setAttribute('min', today);
     }
-
 
     changeSearch(){
       this.isFormSearch = true;
